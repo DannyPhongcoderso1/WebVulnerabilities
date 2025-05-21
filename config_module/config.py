@@ -64,10 +64,18 @@ CONFIG_DIR = os.path.dirname(__file__)
 BASE_DIR = os.path.dirname(CONFIG_DIR)
 
 # Đường dẫn tới thư mục data ở cùng cấp với config
+JSON_DIR = os.path.join(BASE_DIR, "config_module")
 DATA_DIR = os.path.join(BASE_DIR, "data")
+XTRAIN = os.path.join(DATA_DIR, "X_train.npy")
+YTRAIN = os.path.join(DATA_DIR, "y_train.npy")
+XVAL = os.path.join(DATA_DIR, "X_val.npy")
+YVAL = os.path.join(DATA_DIR, "y_val.npy")
+XTEST = os.path.join(DATA_DIR, "X_test.npy")
+YTEST = os.path.join(DATA_DIR, "y_test.npy")
 
 CSIC_FILE = os.path.join(DATA_DIR, "csic_database.csv")
 
 PARSE_REQUEST_TEST = os.path.join(DATA_DIR, "parsed_requests_test.csv")
-
+JSON_FILE = os.path.join(JSON_DIR, "config.json")
 PARSE_REQUEST_TRAIN = os.path.join(DATA_DIR, "parsed_requests_train.csv")
+

@@ -7,11 +7,11 @@ from sklearn.tree import DecisionTreeClassifier
 
 
 from sklearn.neighbors import KNeighborsClassifier
-
+import pickle
 from sklearn.svm import LinearSVC
 from sklearn.calibration import CalibratedClassifierCV
 from sklearn.naive_bayes import GaussianNB
-
+from models.evaluate_models import save_model_and_metrics
 from xgboost import XGBClassifier
 from config_module.config import RANDOM_STATE, MAX_ITER, N_JOBS, VERBOSE, N_ESTIMATORS, GRID_SEARCH_N_ESTIMATORS, MAX_DEPTH, MIN_SAMPLES_SPLIT, CV, KNN_N_NEIGHBORS, KNN_METRIC, XGBOOST_N_ESTIMATORS, XGBOOST_MAX_DEPTH, XGBOOST_LEARNING_RATE, XGBOOST_SUBSAMPLE,XGBOOST_SCALE_POSITIVE_WEIGHT, XGBOOST_COLSAMPLE_BYTREE, OBJECTIVE, LINEAR_SVC_C, LINEAR_SVC_CV, LINEAR_SVC_TOL, LINEAR_SVC_MAX_ITER
  
@@ -77,7 +77,7 @@ def random_forest_grid_search(X_train, y_train, X_test, X_val):
     y_test_proba = best_rf_model.predict_proba(X_test)[:, 1]
     prediction_time = time.time() - start_time
     print(f"Prediction time (s): {prediction_time:.2f}")
-
+    
     
     return y_test_pred, y_test_proba, y_val_pred, y_val_proba, best_rf_model
     
@@ -98,6 +98,18 @@ def naive_bayes_opt_gs(X_train, y_train, X_test, X_val):
     y_test_proba = nb_model.predict_proba(X_test)[:, 1]
     prediction_time = time.time() - start_time
     print(f"Prediction time (s):{prediction_time:.2f}")
+    
+    save_model_and_metrics(
+        model=nb_model,
+        y_val=X_val,
+        y_val_pred=y_val_pred,
+        y_val_proba=y_val_proba,
+        y_test=X_test,
+        y_test_pred=y_test_pred,
+        y_test_proba=y_test_proba,
+        training_time=training_time,
+        prediction_time=prediction_time
+    )
     return y_test_pred, y_test_proba, y_val_pred, y_val_proba,nb_model
     
 def decision_tree(X_train, y_train, X_test, X_val):
@@ -133,7 +145,10 @@ def knn(X_train, y_train, X_test, X_val):
     y_test_proba = knn_model.predict_proba(X_test)[:, 1]
     prediction_time = time.time() - start_time
     print(f"Prediction time (s):{prediction_time:.2f}")
-    return y_test_pred, y_test_proba, y_val_pred, y_val_proba,knn_model
+    
+   
+    
+    return y_test_pred, y_test_proba, y_val_pred, y_val_proba,knn_model,training_time, prediction_time
 
 def linear_svc(X_train, y_train, X_test, X_val):
     base_model = LinearSVC(C=LINEAR_SVC_C, random_state=RANDOM_STATE, tol=LINEAR_SVC_TOL, max_iter=MAX_ITER)
@@ -183,3 +198,4 @@ def xgboost(X_train, y_train, X_test, X_val):
     prediction_time = time.time() - start_time
     print(f"Prediction time (s):{prediction_time:.2f}")
     return y_test_pred, y_test_proba, y_val_pred, y_val_proba,xgb_model
+

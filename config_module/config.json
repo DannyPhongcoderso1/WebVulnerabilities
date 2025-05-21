@@ -1,0 +1,6 @@
+
+{
+  "model_name": "Naive Bayes",
+  "model_path": "naive_bayes_model.pkl",
+  "result_csv": "model_results.csv"
+}
