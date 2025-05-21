@@ -1,6 +1,37 @@
-
-{
-  "model_name": "Naive Bayes",
-  "model_path": "naive_bayes_model.pkl",
-  "result_csv": "model_results.csv"
-}
+[
+  {
+    "model_name": "Naive Bayes",
+    "model_path": "naive_bayes_model.pkl",
+    "result_csv": "model_results.csv"
+  },
+  {
+    "model_name": "Decision Tree",
+    "model_path": "Decision_tree_model.pkl",
+    "result_csv": "model_results.csv"
+  },
+  {
+    "model_name": "Random Forest",
+    "model_path": "random_forest_model.pkl",
+    "result_csv": "model_results.csv"
+  },
+  {
+    "model_name": "Random Forest Grids",
+    "model_path": "random_forest_grids.pkl",
+    "result_csv": "model_results.csv"
+  },
+  {
+    "model_name": "Knn",
+    "model_path": "knn.pkl",
+    "result_csv": "model_results.csv"
+  },
+  {
+    "model_name": "Linear SVC",
+    "model_path": "linearsvc.pkl",
+    "result_csv": "model_results.csv"
+  },
+  {
+    "model_name": "XGBoost",
+    "model_path": "xgboost.pkl",
+    "result_csv": "model_results.csv"
+  }
+]

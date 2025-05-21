@@ -1,11 +1,13 @@
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname('config_module/config.py'), '..')))
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score, roc_auc_score, log_loss
 from sklearn.ensemble import RandomForestClassifier
 import matplotlib.pyplot as plt
 import os
+import sys
 import json
 import pickle
 import pandas as pd
-from config_module.config import JSON_FILE
+
 def print_metrics(train_type, y_true, y_pred, y_proba, dataset_name):
     accuracy = accuracy_score(y_true, y_pred)
     test_error = 1 - accuracy
@@ -61,26 +63,31 @@ def test(model: RandomForestClassifier, X_test, y_test):
 def save_model_and_metrics(model, y_val, y_val_pred, y_val_proba,
                            y_test, y_test_pred, y_test_proba,
                            training_time, prediction_time,
-                           config_path=JSON_FILE):
+                           model_name_match = "",config_path = None):  # chọn theo tên
 
     with open(config_path, 'r') as f:
-        config = json.load(f)
+        config_list = json.load(f)  # Đây là một danh sách
+
+    # Tìm đúng config theo model_name
+    config = next((cfg for cfg in config_list if cfg['model_name'] == model_name_match), None)
+
+    if config is None:
+        raise ValueError(f"Không tìm thấy cấu hình cho model: {model_name_match}")
 
     model_name = config.get("model_name", "UnknownModel")
     model_path = config.get("model_path", "model.pkl")
     results_file = config.get("result_csv", "model_results.csv")
 
- 
+    # Lưu model
     with open(model_path, 'wb') as f:
         pickle.dump(model, f)
-    print(f" Mô hình đã được lưu tại: {model_path}")
+    print(f"✅ Mô hình đã được lưu tại: {model_path}")
 
-
-    val_metrics = print_metrics('ML', y_val, y_val_pred, y_val_proba, "tập val")
-    test_metrics = print_metrics('ML', y_test, y_test_pred, y_test_proba, "tập test")
+    # Tính metric
+    val_metrics = print_metrics('ML', y_val, y_val_pred, y_val_proba, "Tập val")
+    test_metrics = print_metrics('ML', y_test, y_test_pred, y_test_proba, "Tập test")
     test_metrics['Training Time'] = training_time
     test_metrics['Prediction Time'] = prediction_time
-
 
     results_df = pd.DataFrame([val_metrics, test_metrics])
     results_df['Model'] = model_name
@@ -90,7 +97,4 @@ def save_model_and_metrics(model, y_val, y_val_pred, y_val_proba,
         results_df = pd.concat([existing_results, results_df], ignore_index=True)
 
     results_df.to_csv(results_file, index=False)
-    print(f" Kết quả đã được lưu vào: {results_file}")
-    
-if __name__ == "__main__":
-    print(JSON_FILE)
+    print(f"📊 Kết quả đã được lưu vào: {results_file}")

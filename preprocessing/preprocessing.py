@@ -8,6 +8,10 @@ from urllib.parse import urlparse
 import re
 import pandas as pd
 import numpy as np 
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname("config_module/config"), '..')))
+
 from config_module.config import PCA_COMPONENT, MAX_FEATURE
 
 def extract_features(url):
@@ -274,27 +278,5 @@ def parsed_request_train_preprocess(df: pd.DataFrame):
 
 
     
-from sklearn.model_selection import train_test_split
 
-import numpy as np
-from config_module.config import CSIC_FILE, PARSE_REQUEST_TEST, PARSE_REQUEST_TRAIN, XTRAIN, YTRAIN, XVAL, YVAL, XTEST, YTEST
-from data.raw_data import load
-
-from config_module.config import RANDOM_STATE, TEST_SIZE_1, TEST_SIZE_2
-
-
-data_raw = load(CSIC_FILE)
-data_raw_train = load(PARSE_REQUEST_TEST)
-data_raw1 = load(PARSE_REQUEST_TEST)
-X_resampled, y_resampled = CSIC_preprocess(data_raw)
-X_resampled_1, y_resampled_1 = parsed_request_train_preprocess(data_raw_train)
-
-
-
-# Train:Val:Test theo tỷ lệ 7:2:1
-X_train, X_temp, y_train, y_temp = train_test_split(X_resampled, y_resampled, test_size=TEST_SIZE_1, random_state=RANDOM_STATE)
-X_val, X_test, y_val, y_test = train_test_split(X_temp, y_temp, test_size=TEST_SIZE_2, random_state=RANDOM_STATE)
-
-X_train_1, X_temp_1, y_train_1, y_temp_1 = train_test_split(X_resampled_1, y_resampled_1, test_size=TEST_SIZE_1, random_state=RANDOM_STATE)
-X_val_1, X_test_1, y_val_1, y_test_1 = train_test_split(X_temp_1, y_temp_1, test_size=TEST_SIZE_2, random_state=RANDOM_STATE)
 
