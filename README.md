@@ -6,6 +6,7 @@
 
 ## Cấu trúc thư mục
 
+```text
 WEBVULNERABILITIES/
 ├── config_module/
 │   ├── config.json
@@ -27,21 +28,26 @@ WEBVULNERABILITIES/
 │   ├── utils.py
 │   └── model_results.csv
 └── final.ipynb
+```
 
 ## Hướng dẫn chạy
 
 1. Cài đặt các thư viện cần thiết:
 ```bash
-pip install -r requirements.txt
+pip install -r requirement.txt
+```
+2.Mở file notebook
+Chạy lệnh sau để khởi động Jupyter Notebook
+```bash
+jupyter notebook
+```
+Mở file final.ipynb (nằm ở thư mục gốc)
 
-2. Tiền xử lí dữ liệu
-python scripts/preprocess.py
-
-3. Huấn luyện mô hình
-python scripts/train_models.py
-
-4. Đánh giá mô hình
-python scripts/evaluate_models.py
+3. Thực hiện từng bước trong Notebook:
+File được thiết kết để chạy tuần tự từng phần:
+    1. Tiền xử lí dữ liệu (Load dữ liệu từ data/ vào preprocessing.py, phân chia dữ liệu thành các file .npy)
+    2. Huấn luyện mô hình (Đọc cấu hình từ Config.py vào train_model.py, đọc các dữ liệu đã lưu vào train_model.py, các mô hình tốt nhất được lưu ra thành các file .pkl)
+    3. Đánh giá (kết quả đánh giá được lưu vào file model_results.csv)
 
 Thông tin thêm 
 * Các mô hình và tham số được tinh chỉnh bằng Grid Search
