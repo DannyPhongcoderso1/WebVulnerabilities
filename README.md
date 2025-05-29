@@ -30,6 +30,17 @@ WEBVULNERABILITIES/
 └── final.ipynb
 ```
 
+## Môi trường sử dụng:
+Python: 3.12.5
+Hệ điều hành: Windows 11
+IDE khuyên dùng: VSCode
+* Thư viện chính:
+    * scikit-learn
+    * xgboost
+    * pandas
+    * matplotlib
+    * seaborn
+
 ## Hướng dẫn chạy
 
 1. Cài đặt các thư viện cần thiết:
