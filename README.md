@@ -28,6 +28,8 @@ WEBVULNERABILITIES/
 │   └── xml_preprocessing.py
 ├── utils/
 │   └── utils.py
+├── README.md
+├── requirements.txt
 └── final.ipynb
 ```
 
