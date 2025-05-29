@@ -13,6 +13,8 @@ WEBVULNERABILITIES/
 │   └── config.py
 ├── data/
 │   ├── csic_database.csv
+│   ├── parsed_requests_tes
+│   ├── parsed_requests_trai
 │   └── raw_data.py
 ├── features/
 ├── inference/
@@ -25,8 +27,7 @@ WEBVULNERABILITIES/
 │   ├── preprocessing.py
 │   └── xml_preprocessing.py
 ├── utils/
-│   ├── utils.py
-│   └── model_results.csv
+│   └── utils.py
 └── final.ipynb
 ```
 
