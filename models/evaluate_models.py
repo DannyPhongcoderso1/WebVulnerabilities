@@ -75,7 +75,7 @@ def save_model_and_metrics(model, y_val, y_val_pred, y_val_proba,
     config = next((cfg for cfg in config_list if cfg['model_name'] == model_name_match), None)
 
     if config is None:
-        raise ValueError(f"Không tìm thấy cấu hình cho model: {model_name_match}")
+        raise ValueError(f"No config found for model: {model_name_match}")
 
     model_name = config.get("model_name", "UnknownModel")
     model_path = config.get("model_path", "model.pkl")
@@ -84,11 +84,11 @@ def save_model_and_metrics(model, y_val, y_val_pred, y_val_proba,
     # Lưu model
     with open(model_path, 'wb') as f:
         pickle.dump(model, f)
-    print(f"✅ Mô hình đã được lưu tại: {model_path}")
+    print(f"Model saved to: {model_path}")
 
     # Tính metric
-    val_metrics = print_metrics('ML', y_val, y_val_pred, y_val_proba, "Tập val")
-    test_metrics = print_metrics('ML', y_test, y_test_pred, y_test_proba, "Tập test")
+    val_metrics = print_metrics('ML', y_val, y_val_pred, y_val_proba, "validation")
+    test_metrics = print_metrics('ML', y_test, y_test_pred, y_test_proba, "test")
     test_metrics['Training Time'] = training_time
     test_metrics['Prediction Time'] = prediction_time
 
@@ -100,4 +100,4 @@ def save_model_and_metrics(model, y_val, y_val_pred, y_val_proba,
         results_df = pd.concat([existing_results, results_df], ignore_index=True)
 
     results_df.to_csv(results_file, index=False)
-    print(f"📊 Kết quả đã được lưu vào: {results_file}")
+    print(f"Results saved to: {results_file}")

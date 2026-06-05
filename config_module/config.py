@@ -36,12 +36,12 @@ NAIVE_BAYES_GRID = {
 
 #DECISION TREE 
 DECISION_TREE_GRID= {
-    'criterion': ['gini', 'entropy'],           # giảm từ 3 xuống 2
-    'max_depth': [None, 10, 20],                 # giảm từ 5 xuống 3
-    'min_samples_split': [2, 5],                 # giảm từ 3 xuống 2
-    'min_samples_leaf': [1, 2],                   # giảm từ 3 xuống 2
-    'max_features': [None, 'sqrt'],              # giảm từ 3 xuống 2
-    'ccp_alpha': [0.0, 0.01]                      # giảm từ 3 xuống 2
+    'criterion': ['gini', 'entropy'],           
+    'max_depth': [None, 10, 20],                 
+    'min_samples_split': [2, 5],                 
+    'min_samples_leaf': [1, 2],                   
+    'max_features': [None, 'sqrt'],              
+    'ccp_alpha': [0.0, 0.01]                      
 }
 
 
